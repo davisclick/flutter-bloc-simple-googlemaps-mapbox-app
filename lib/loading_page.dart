@@ -27,7 +27,9 @@ class LoadingPage extends StatelessWidget {
 
     await Future.delayed( Duration(milliseconds: 1000));
 
-    Navigator.pushReplacement(context, navigationMapFadeIn(context, AccessGPSPage()));
+    print('Loading page...');
+
+    //Navigator.pushReplacement(context, navigationMapFadeIn(context, AccessGPSPage()));
     //Navigator.pushReplacement(context, navigationMapFadeIn(context, MapPage()));
   }
 }
