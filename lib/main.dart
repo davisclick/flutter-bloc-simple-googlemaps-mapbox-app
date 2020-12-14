@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mapa_app/access_gps_page.dart';
-import 'package:mapa_app/loading_page.dart';
-import 'package:mapa_app/map_page.dart';
+import 'package:mapa_app/pages/access_gps_page.dart';
+import 'package:mapa_app/pages/loading_page.dart';
+import 'package:mapa_app/pages/map_page.dart';
  
 void main() => runApp(MyApp());
  
