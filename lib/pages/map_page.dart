@@ -29,7 +29,11 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Map Page'),
+        child: BlocBuilder<MyLocationBloc, MyLocationState>(
+          builder: (context, state) {
+            return Text('${state.location}');
+          },
+        )
      ),
    );
   }

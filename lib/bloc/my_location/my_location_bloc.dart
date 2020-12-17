@@ -20,8 +20,10 @@ class MyLocationBloc extends Bloc<MyLocationEvent, MyLocationState> {
       desiredAccuracy: LocationAccuracy.high,
       distanceFilter: 10
     ).listen((Position position) { 
-
       print(position);
+
+      final newLocation = LatLng( position.latitude, position.longitude);
+      add( OnLocationChange(newLocation) );
     });
   }
 
@@ -30,9 +32,14 @@ class MyLocationBloc extends Bloc<MyLocationEvent, MyLocationState> {
   }
 
   @override
-  Stream<MyLocationState> mapEventToState(
-    MyLocationEvent event,
-  ) async* {
-    // TODO: implement mapEventToState
+  Stream<MyLocationState> mapEventToState( MyLocationEvent event ) async* {
+    
+    if( event is OnLocationChange ){
+      print(event);
+      yield state.copyWith(
+        locationExists: true,
+        location: event.location
+      );
+    }
   }
 }
