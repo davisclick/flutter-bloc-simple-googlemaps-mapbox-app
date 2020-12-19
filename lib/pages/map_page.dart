@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mapa_app/bloc/map/map_bloc.dart';
 import 'package:mapa_app/bloc/my_location/my_location_bloc.dart';
 
 
@@ -43,6 +44,8 @@ class _MapPageState extends State<MapPage> {
 
     if( !state.locationExists ) return Center(child: Text('Locating...'));
 
+    final mapBloc = BlocProvider.of<MapBloc>(context);
+
     final cameraPosition = new CameraPosition(
       target: state.location,
       zoom: 15
@@ -53,6 +56,7 @@ class _MapPageState extends State<MapPage> {
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
       zoomControlsEnabled: false,
+      onMapCreated: mapBloc.initMap,
       
     );
 
