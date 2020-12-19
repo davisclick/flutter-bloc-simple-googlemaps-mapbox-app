@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:mapa_app/themes/uber_map.dart';
 import 'package:meta/meta.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,6 +19,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     if( !state.mapLoaded ){
       this._mapController = controller;
+
+      this._mapController.setMapStyle( jsonEncode(uberMapTheme) );
 
       add( OnMapLoaded() );
     } 
