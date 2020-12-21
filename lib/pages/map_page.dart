@@ -39,7 +39,8 @@ class _MapPageState extends State<MapPage> {
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            BtnLocation()
+            BtnLocation(),
+            BtnMyRoute()
           ],
         )
    );

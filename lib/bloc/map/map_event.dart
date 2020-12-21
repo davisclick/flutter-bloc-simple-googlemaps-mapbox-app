@@ -5,6 +5,8 @@ abstract class MapEvent {}
 
 class OnMapLoaded extends MapEvent {}
 
+class OnMarkRoute extends MapEvent {}
+
 class OnNewLocation extends MapEvent {
 
   final LatLng location;

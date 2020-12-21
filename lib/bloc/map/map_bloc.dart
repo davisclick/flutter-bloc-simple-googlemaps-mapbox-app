@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart' show Colors;
 import 'package:mapa_app/themes/uber_map.dart';
 import 'package:meta/meta.dart';
 
@@ -17,6 +18,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   Polyline _myRoute = new Polyline(
     polylineId: PolylineId("myRoute"),
     width: 4,
+    color: Colors.black87,
     points: []
   );
 
@@ -47,8 +49,22 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
      final currentPolylines = state.polylines;
      currentPolylines['myRoute'] = this._myRoute;
-
       yield state.copyWith( polylines: currentPolylines );
+
+    }else if ( event is OnMarkRoute ) {
+
+      if( !state.drawRoute ){
+        this._myRoute = this._myRoute.copyWith( colorParam:  Colors.black87 );
+      }else{
+         this._myRoute = this._myRoute.copyWith( colorParam:  Colors.transparent);
+      }
+
+      final currentPolylines = state.polylines;
+      currentPolylines['myRoute'] = this._myRoute;
+      yield state.copyWith( 
+        drawRoute: !state.drawRoute,
+        polylines: currentPolylines 
+      );
     }
   }
 }
