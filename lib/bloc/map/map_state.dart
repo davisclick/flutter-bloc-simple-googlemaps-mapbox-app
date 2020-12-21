@@ -15,7 +15,9 @@ class MapState {
   }): this.polylines = polylines ?? new Map();
 
   copyWith({
-    bool mapLoaded
+    bool mapLoaded,
+    bool drawRoute,
+    Map<String, Polyline> polylines
   }) => MapState(
     mapLoaded: mapLoaded ?? this.mapLoaded,
     drawRoute: drawRoute ?? this.drawRoute,

@@ -14,6 +14,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc() : super(MapState());
 
   GoogleMapController _mapController;
+  Polyline _myRoute = new Polyline(
+    polylineId: PolylineId("myRoute"),
+    width: 4,
+    points: []
+  );
 
   void initMap( GoogleMapController controller ){
 
@@ -36,6 +41,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     if( event is OnMapLoaded ){
       yield state.copyWith( mapLoaded: true );
+    }else if( event is OnNewLocation ){
+     List<LatLng> points = [...this._myRoute.points, event.location];
+     this._myRoute = this._myRoute.copyWith( pointsParam: points );
+
+     final currentPolylines = state.polylines;
+     currentPolylines['myRoute'] = this._myRoute;
+
+      yield state.copyWith( polylines: currentPolylines );
     }
   }
 }
