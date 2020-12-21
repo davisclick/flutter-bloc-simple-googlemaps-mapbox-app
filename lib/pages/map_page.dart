@@ -51,6 +51,8 @@ class _MapPageState extends State<MapPage> {
 
     final mapBloc = BlocProvider.of<MapBloc>(context);
 
+    mapBloc.add(OnNewLocation(state.location));
+
     final cameraPosition = new CameraPosition(
       target: state.location,
       zoom: 15
