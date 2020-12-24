@@ -44,27 +44,38 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     if( event is OnMapLoaded ){
       yield state.copyWith( mapLoaded: true );
     }else if( event is OnNewLocation ){
-     List<LatLng> points = [...this._myRoute.points, event.location];
+      yield*  this._onNewLocation(event);
+    }else if ( event is OnMarkRoute ) {
+       yield*  this._onMarkRoute( event );
+    }
+  }
+
+  Stream<MapState> _onNewLocation( OnNewLocation event ) async * {
+
+    List<LatLng> points = [...this._myRoute.points, event.location];
      this._myRoute = this._myRoute.copyWith( pointsParam: points );
 
      final currentPolylines = state.polylines;
      currentPolylines['myRoute'] = this._myRoute;
       yield state.copyWith( polylines: currentPolylines );
 
-    }else if ( event is OnMarkRoute ) {
+  }
 
-      if( !state.drawRoute ){
+  Stream<MapState> _onMarkRoute( OnMarkRoute event ) async * {
+
+    if( !state.drawRoute ){
         this._myRoute = this._myRoute.copyWith( colorParam:  Colors.black87 );
-      }else{
-         this._myRoute = this._myRoute.copyWith( colorParam:  Colors.transparent);
-      }
-
-      final currentPolylines = state.polylines;
-      currentPolylines['myRoute'] = this._myRoute;
-      yield state.copyWith( 
-        drawRoute: !state.drawRoute,
-        polylines: currentPolylines 
-      );
+    }else{
+        this._myRoute = this._myRoute.copyWith( colorParam:  Colors.transparent);
     }
+
+    final currentPolylines = state.polylines;
+    currentPolylines['myRoute'] = this._myRoute;
+
+    yield state.copyWith( 
+      drawRoute: !state.drawRoute,
+      polylines: currentPolylines 
+    );
   }
 }
+
