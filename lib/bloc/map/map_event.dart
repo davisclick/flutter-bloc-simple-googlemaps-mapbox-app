@@ -16,3 +16,10 @@ class OnNewLocation extends MapEvent {
   OnNewLocation(this.location);
 
 }
+
+class OnMapMoved extends MapEvent {
+
+  final LatLng centerMap;
+
+  OnMapMoved(this.centerMap);
+}
