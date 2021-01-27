@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class SearchResults {
+class SearchResult {
 
   final bool canceled;
   final bool manual;
@@ -10,7 +10,7 @@ class SearchResults {
   final String nameDestination;
   final String description;
 
-  SearchResults({
+  SearchResult({
     @required this.canceled, 
     this.manual, 
     this.position, 

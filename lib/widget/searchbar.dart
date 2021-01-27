@@ -1,6 +1,7 @@
 part of 'widgets.dart';
 
 class SearchBar extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
 
@@ -8,9 +9,10 @@ class SearchBar extends StatelessWidget {
 
     return SafeArea(
         child: GestureDetector(
-          onTap: (){
+          onTap: () async {
             print('Hello...!');
-            showSearch(context: context, delegate: SearchDestination());
+            final result = await showSearch(context: context, delegate: SearchDestination());
+            this.retornoBusqueda(result);
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30),
@@ -31,5 +33,11 @@ class SearchBar extends StatelessWidget {
       ),
         ),
     );
+  }
+
+  void retornoBusqueda( SearchResult result ){
+
+    if( result.canceled ) return;
+
   }
 }
