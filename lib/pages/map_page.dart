@@ -40,10 +40,12 @@ class _MapPageState extends State<MapPage> {
               builder: (_, state) => createMap( state )
             ),
 
-            Positioned(
-              top: 15,
-              child: SearchBar()
-            )
+            // Positioned(
+            //   top: 15,
+            //   child: SearchBar()
+            // )
+
+            ManualMarker()
 
         ],
       ),
