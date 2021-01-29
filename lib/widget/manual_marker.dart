@@ -5,6 +5,8 @@ class ManualMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Positioned(
@@ -28,6 +30,22 @@ class ManualMarker extends StatelessWidget {
 
               child: Icon(Icons.location_on, size: 50,)
             ),
+          ),
+
+          Positioned(
+            bottom: 70,
+            left: 40,
+            child: MaterialButton(
+              minWidth: width - 120,
+              child: Text('Confirm destination',style: TextStyle( color: Colors.white )),
+              color: Colors.black,
+              shape: StadiumBorder(),
+              elevation: 0,
+              splashColor: Colors.transparent,
+              onPressed: () {
+
+              },
+            )
           )
       ],
     );
