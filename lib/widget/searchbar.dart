@@ -12,7 +12,7 @@ class SearchBar extends StatelessWidget {
           onTap: () async {
             print('Hello...!');
             final result = await showSearch(context: context, delegate: SearchDestination());
-            this.retornoBusqueda(result);
+            this.retornoBusqueda( context, result );
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30),
@@ -35,9 +35,13 @@ class SearchBar extends StatelessWidget {
     );
   }
 
-  void retornoBusqueda( SearchResult result ){
+  void retornoBusqueda( BuildContext context,  SearchResult result ){
 
     if( result.canceled ) return;
 
+    if( result.manual ){
+      context.read<SearchBloc>().add( OnActiveManualMarker() );
+      return;
+    }
   }
 }
