@@ -36,7 +36,7 @@ class _BuildManualMarker extends StatelessWidget {
             child: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black,),
               onPressed: (){
-
+                context.read<SearchBloc>().add( OnDeActiveManualMarker() );
               }
               ),
             )
