@@ -2,8 +2,25 @@ part of 'widgets.dart';
 
 class SearchBar extends StatelessWidget {
 
+  
   @override
   Widget build(BuildContext context) {
+    
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        
+        if( state.manualSelection ){
+          return Container();
+        }else{
+          return buildSearchBar(context);
+        }
+
+      },
+    );
+  }
+
+
+  Widget buildSearchBar(BuildContext context) {
 
     final width = MediaQuery.of(context).size.width;
 
@@ -44,4 +61,6 @@ class SearchBar extends StatelessWidget {
       return;
     }
   }
+
+  
 }
