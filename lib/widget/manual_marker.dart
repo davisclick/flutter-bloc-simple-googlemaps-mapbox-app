@@ -84,6 +84,16 @@ class _BuildManualMarker extends StatelessWidget {
     final start = context.read<MyLocationBloc>().state.location;
     final end = context.read<MapBloc>().state.centralLocation;
 
-    await trafficService.getCoordsStartAndEnd(start, end);
+    final trafficResponse = await trafficService.getCoordsStartAndEnd(start, end);
+
+    final geometry = trafficResponse.routes[0].geometry;
+    final duration = trafficResponse.routes[0].duration;
+    final distance = trafficResponse.routes[0].distance;
+
+    final points = Poly.Polyline.Decode( encodedString: geometry, precision: 6).decodedCoords;
+    final List<LatLng> routeCoords = points.map(
+      (point) => LatLng(point[0], point[2])
+    ).toList();
+
   }
 }
