@@ -6,7 +6,7 @@ class BtnFollowLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final mapBloc = context.bloc<MapBloc>();
+    final mapBloc = context.watch<MapBloc>();
 
     return BlocBuilder<MapBloc, MapState>(
       builder: (context, state) {

@@ -6,7 +6,7 @@ class BtnMyRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final mapBloc = context.bloc<MapBloc>();
+    final mapBloc = context.watch<MapBloc>();
 
     return Container(
       margin: EdgeInsets.only(bottom: 10),
