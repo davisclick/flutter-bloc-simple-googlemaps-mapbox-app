@@ -33,6 +33,7 @@ class TrafficService {
     });
 
     final data = DrivingResponse.fromJson(resp.data);
+    
 
     return data;
   }
