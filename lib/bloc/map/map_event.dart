@@ -21,7 +21,6 @@ class OnCreateRouteStartDestination extends MapEvent {
 class OnNewLocation extends MapEvent {
 
   final LatLng location;
-
   OnNewLocation(this.location);
 
 }
@@ -29,6 +28,5 @@ class OnNewLocation extends MapEvent {
 class OnMapMoved extends MapEvent {
 
   final LatLng centerMap;
-
   OnMapMoved(this.centerMap);
 }

@@ -15,6 +15,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc() : super(MapState());
 
   GoogleMapController _mapController;
+
   Polyline _myRoute = new Polyline(
     polylineId: PolylineId("myRoute"),
     width: 4,
@@ -33,15 +34,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     if( !state.mapLoaded ){
       this._mapController = controller;
-
       this._mapController.setMapStyle( jsonEncode(uberMapTheme) );
 
       add( OnMapLoaded() );
     } 
   }
 
-  void moveCamara( LatLng position ){
-     final cameraUpdate = CameraUpdate.newLatLng(position);
+  void moveCamara( LatLng destination ){
+     final cameraUpdate = CameraUpdate.newLatLng(destination);
      this._mapController?.animateCamera(cameraUpdate); 
   }
 
@@ -50,19 +50,22 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     if( event is OnMapLoaded ){
       yield state.copyWith( mapLoaded: true );
+
     }else if( event is OnNewLocation ){
       yield*  this._onNewLocation(event);
+
     }else if ( event is OnMarkRoute ) {
        yield*  this._onMarkRoute( event );
+
     }else if ( event is OnFollowLocation ) {
-      if( !state.followLocation ){
-        this.moveCamara(this._myRoute.points[ this._myRoute.points.length - 1 ] );
-      }
        yield*  this._onFollowLocation( event );
+
     }else if ( event is OnMapMoved ) {
        yield*  this._onMapMoved( event );
+
     }else if ( event is OnCreateRouteStartDestination ) {
        yield*  this._onCreateRouteStartDestination( event );
+
     }
   }
 
@@ -77,6 +80,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
      final currentPolylines = state.polylines;
      currentPolylines['myRoute'] = this._myRoute;
+
       yield state.copyWith( polylines: currentPolylines );
 
   }
@@ -99,6 +103,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   Stream<MapState> _onFollowLocation( OnFollowLocation event ) async * {
+     if( !state.followLocation ){
+        this.moveCamara(this._myRoute.points[ this._myRoute.points.length - 1 ] );
+      }
       yield state.copyWith( followLocation: !state.followLocation );
   }
 
