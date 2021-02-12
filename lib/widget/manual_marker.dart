@@ -79,6 +79,8 @@ class _BuildManualMarker extends StatelessWidget {
 
   void calculateDestination( BuildContext context ) async {
 
+    calculatingAlert(context);
+
     final trafficService = new  TrafficService();
     final mapBloc = context.read<MapBloc>();
 
@@ -98,5 +100,7 @@ class _BuildManualMarker extends StatelessWidget {
 
     mapBloc.add( OnCreateRouteStartDestination(routeCoords, distance, duration) );
 
+    Navigator.of(context).pop();
+    context.read<SearchBloc>().add( OnDeActiveManualMarker() );
   }
 }
