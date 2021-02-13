@@ -27,7 +27,6 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     polylineId: PolylineId("myRouteDestination"),
     width: 4,
     color: Colors.black87,
-    points: []
   );
 
   void initMap( GoogleMapController controller ){
