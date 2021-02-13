@@ -30,7 +30,6 @@ class SearchBar extends StatelessWidget {
     return SafeArea(
         child: GestureDetector(
           onTap: () async {
-            print('Hello...!');
             final result = await showSearch(context: context, delegate: SearchDestination());
             this.retornoBusqueda( context, result );
           },
